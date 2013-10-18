@@ -84,7 +84,7 @@ window.utilities = (function(){
     },
 
     /**
-     * Allows for safe searching of multi-dimensional properties of a object without erroring if some item in the list does not exist
+     * Allows for safe searching of multi-dimensional properties of a object without errors if some item in the defined scope does not exist
      *
      * @method stringJsonParser
      *
@@ -108,10 +108,39 @@ window.utilities = (function(){
       return returnValue;
     },
 
-    escapeHtml: function() {
-      return String(string).replace(/[&<>"'\/]/g, function (s) {
+    /**
+     * Escapes HTML
+     *
+     * @method escapeHtml
+     *
+     * @param {string} HTML to escape
+     *
+     * @returns {*} The escaped HTML
+     */
+    escapeHtml: function(string) {
+      return string.replace(/[&<>"'\/]/g, function (s) {
         return htmlEntityMap[s];
       });
+    },
+
+    /**
+     * Generates a random string
+     *
+     * @method randomString
+     *
+     * @param {number} length Length of the string
+     * @param {string} [characterSet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"] Characters to use
+     *
+     * @returns {string} The generated string
+     */
+    randomString: function(length, characterSet) {
+      characterSet = characterSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var randomString = '';
+      for (var i = 0; i < length; i++) {
+        var randomPoz = Math.floor(Math.random() * characterSet.length);
+        randomString += characterSet.substring(randomPoz,randomPoz+1);
+      }
+      return randomString;
     }
   }
 }());
